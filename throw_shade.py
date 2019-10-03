@@ -104,16 +104,17 @@ class MindstormsGadget(AlexaGadget):
         Handles move commands from the directive.
         Right and left movement can under or over turn depending on the surface type.
         :param direction: the move direction
-        :param duration: the duration in seconds
+        :param duration: the duration in rotations
         :param speed: the speed percentage as an integer
         :param is_blocking: if set, motor run until duration expired before accepting another command
         """
         print("Move command: ({}, {}, {}, {})".format(direction, speed, duration, is_blocking))
+        let position = duration * 360
         if direction in Direction.FORWARD.value:
-            self.motor.run_to_rel_pos(position_sp=720, speed_p=(speed), stop_action="hold")
+            self.motor.run_to_rel_pos(position_sp=int(position), speed_p=(speed), stop_action="hold")
 
         if direction in Direction.BACKWARD.value:
-            self.motor.run_to_rel_pos(position_sp=-720, speed_p=(speed), stop_action="hold")
+            self.motor.run_to_rel_pos(position_sp=-int(position), speed_p=(speed), stop_action="hold")
 
         if direction in Direction.STOP.value:
             self.motor.stop(stop_action="hold")
@@ -126,10 +127,10 @@ class MindstormsGadget(AlexaGadget):
         """
         print("Activate command: ({}, {})".format(command, speed))
         if command in Command.LOWER_BLIND.value:
-            self.drive.on_for_seconds(SpeedPercent(int(speed)), SpeedPercent(5), 12)
+            self.motor.run_to_rel_pos(position_sp=-3600, speed_p=int(speed), stop_action="hold"))
 
         if command in Command.RAISE_BLIND.value:
-            self.drive.on_for_seconds(SpeedPercent(int(-speed)), SpeedPercent(5), 12)
+            self.motor.run_to_rel_pos(position_sp=--3600, speed_p=int(speed), stop_action="hold"))
 
 if __name__ == '__main__':
 

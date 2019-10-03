@@ -61,7 +61,7 @@ const SetSpeedIntentHandler = {
 
         // Bound speed to (1-100)
         let speed = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Speed');
-        speed = Math.max(1, Math.min(100, parseInt(speed)));
+        speed = Math.max(1, Math.min(1000, parseInt(speed)));
         Util.putSessionAttribute(handlerInput, 'speed', speed);
 
         return handlerInput.responseBuilder
