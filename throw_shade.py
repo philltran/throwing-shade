@@ -39,8 +39,8 @@ class Command(Enum):
     The list of preset commands and their invocation variation.
     These variations correspond to the skill slot values.
     """
-    LOWER_BLIND = ['circle', 'spin']
-    RAISE_BLIND = ['square']
+    LOWER_BLIND = ['lower', 'lower blind', 'throw shade']
+    RAISE_BLIND = ['raise', 'raise blind', 'remove shade']
 
 
 class MindstormsGadget(AlexaGadget):
@@ -58,6 +58,7 @@ class MindstormsGadget(AlexaGadget):
         # Ev3dev initialization
         self.leds = Leds()
         self.sound = Sound()
+        self.motor = Motor(OUTPUT_A)
 
     def on_connected(self, device_addr):
         """
@@ -109,14 +110,13 @@ class MindstormsGadget(AlexaGadget):
         """
         print("Move command: ({}, {}, {}, {})".format(direction, speed, duration, is_blocking))
         if direction in Direction.FORWARD.value:
-            self.drive.on_for_seconds(SpeedPercent(speed), SpeedPercent(speed), duration, block=is_blocking)
+            self.motor.run_to_rel_pos(position_sp=720, speed_p=(speed), stop_action="hold")
 
         if direction in Direction.BACKWARD.value:
-            self.drive.on_for_seconds(SpeedPercent(-speed), SpeedPercent(-speed), duration, block=is_blocking)
+            self.motor.run_to_rel_pos(position_sp=-720, speed_p=(speed), stop_action="hold")
 
         if direction in Direction.STOP.value:
-            self.drive.off()
-            self.patrol_mode = False
+            self.motor.stop(stop_action="hold")
 
     def _activate(self, command, speed=50):
         """

@@ -62,7 +62,6 @@
           "samples": [
             "activate {Command} mode",
             "move in a {Command}",
-            "fire {Command}",
             "activate {Command}"
           ]
         }
@@ -73,27 +72,27 @@
           "values": [
             {
               "name": {
-                "value": "brake"
+                "value": "stop"
               }
             },
             {
               "name": {
-                "value": "go backward"
+                "value": "up"
               }
             },
             {
               "name": {
-                "value": "go forward"
+                "value": "down"
               }
             },
             {
               "name": {
-                "value": "pull shade"
+                "value": "pull"
               }
             },
             {
               "name": {
-                "value": "drop shade"
+                "value": "drop"
               }
             },
             {
@@ -108,7 +107,7 @@
             },
             {
               "name": {
-                "value": "backwards"
+                "value": "raise"
               }
             },
             {
@@ -118,7 +117,7 @@
             },
             {
               "name": {
-                "value": "forwards"
+                "value": "lower"
               }
             },
             {
@@ -149,6 +148,16 @@
             {
               "name": {
                 "value": "raise blinds"
+              }
+            },
+            {
+              "name": {
+                "value": "raise shades"
+              }
+            },
+            {
+              "name": {
+                "value": "lower shades"
               }
             }
           ]
