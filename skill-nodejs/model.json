@@ -46,9 +46,9 @@
             }
           ],
           "samples": [
-            "set speed {Speed} percent",
-            "set {Speed} percent speed",
-            "set speed to {Speed} percent"
+            "set speed {Speed}",
+            "set {Speed} speed",
+            "set speed to {Speed}"
           ]
         },
         {

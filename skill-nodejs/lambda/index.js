@@ -59,13 +59,13 @@ const SetSpeedIntentHandler = {
     },
     handle: function (handlerInput) {
 
-        // Bound speed to (1-100)
+        // Bound speed to (1-1000)
         let speed = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Speed');
         speed = Math.max(1, Math.min(1000, parseInt(speed)));
         Util.putSessionAttribute(handlerInput, 'speed', speed);
 
         return handlerInput.responseBuilder
-            .speak(`speed set to ${speed} percent.`)
+            .speak(`speed set to ${speed} units.`)
             .reprompt("awaiting command")
             .getResponse();
     }
@@ -87,7 +87,7 @@ const MoveIntentHandler = {
 
         // Get data from session attribute
         const attributesManager = handlerInput.attributesManager;
-        const speed = attributesManager.getSessionAttributes().speed || "50";
+        const speed = attributesManager.getSessionAttributes().speed || "500";
         const endpointId = attributesManager.getSessionAttributes().endpointId || [];
 
         // Construct the directive with the payload containing the move parameters
@@ -101,7 +101,7 @@ const MoveIntentHandler = {
 
         const speechOutput = (direction === "brake")
             ?  "Applying brake"
-            : `${direction} ${duration} seconds at ${speed} percent speed`;
+            : `${direction} ${duration} seconds at ${speed} speed`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
