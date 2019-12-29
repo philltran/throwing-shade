@@ -43,7 +43,7 @@ const LaunchRequestHandler = {
         Util.putSessionAttribute(handlerInput, 'endpointId', endpointId);
 
         return handlerInput.responseBuilder
-            .speak("Welcome, you can start issuing move commands")
+            .speak("Welcome, you can start issuing shade commands")
             .reprompt("Awaiting commands")
             .getResponse();
     }
@@ -57,7 +57,7 @@ const SetSpeedIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SetSpeedIntent';
     },
-    handle: function (handlerInput) {
+    handle: function (handlerInput)          {
 
         // Bound speed to (1-1000)
         let speed = Alexa.getSlotValue(handlerInput.requestEnvelope, 'Speed');

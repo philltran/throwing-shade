@@ -119,7 +119,7 @@ class MindstormsGadget(AlexaGadget):
         if direction in Direction.STOP.value:
             self.motor.stop(stop_action="hold")
 
-    def _activate(self, command, speed=50):
+    def _activate(self, command, speed=500):
         """
         Handles preset commands.
         :param command: the preset command
@@ -127,10 +127,12 @@ class MindstormsGadget(AlexaGadget):
         """
         print("Activate command: ({}, {})".format(command, speed))
         if command in Command.RAISE_BLIND.value:
-            self.motor.run_to_rel_pos(position_sp=7200, speed_sp=(speed), stop_action="hold")
+            self.motor.run_to_rel_pos(position_sp=5000, speed_sp=500, stop_action="hold")
+            print('running raise blinds')
 
         if command in Command.LOWER_BLIND.value:
-            self.motor.run_to_rel_pos(position_sp=-7200, speed_sp=(speed), stop_action="hold")
+            self.motor.run_to_rel_pos(position_sp=-5000, speed_sp=500, stop_action="hold")
+            print('running lower blinds')
 
 if __name__ == '__main__':
 
